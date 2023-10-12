@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=AR+One+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=AR+One+Sans&family=Exo+2:wght@300&display=swap');
+
+:root {
+  --backgroundPrimary: #121212; /* Main background color */
+  --backgroundSecondary: #1a1a1a; /* Secondary background color */
+  --textPrimary: #ffffff; /* Main text color, white */
+  --textSecondary: #aaaaaa; /* Secondary text color, grey */
+  --accentYellow: #f1c40f; /* Yellow accent color */
+  --accentPurple: #9b59b6; /* Purple accent color */
+  --accentPink: #e91e63; /* Pink accent color */
+  --defaultFont: 'AR One Sans', sans-serif;
+  --headingFont: 'Exo 2', sans-serif;
+}
+  
+/* Body styles */
+body {
+  background-color: var(--backgroundPrimary);
+  color: var(--textPrimary);
+  font-family: var(--defaultFont);
+}
+
+/* Header styles */
+nav {
+  background-color: var(--backgroundSecondary);
+  color: var(--textPrimary);
+}
+
+/* Button styles */
+button {
+  background-color: var(--accentYellow);
+  color: var(--textPrimary);
+}
+
+/* Link styles */
+a {
+  color: var(--accentPurple);
+  text-decoration: none;
+}
+
+/* Text Styles */
+
+.textPrimary {
+  color: var(--textPrimary);
+}
+
+.textSecondary {
+  color: var(--textSecondary);
+}
+
+/* Highlighted text styles */
+.textYellow {
+  color: var(--accentYellow);
+}
+
+.textPurple {
+  color: var(--accentPurple);
+}
+
+.textPink {
+  color: var(--accentPink);
+}
+  
+.headingFont {
+  font-family: var(--headingFont);
+}
