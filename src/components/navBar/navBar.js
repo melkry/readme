@@ -1,5 +1,3 @@
-import 'navBar.css';
-
 function NavBar() {
   return (
     <nav className="navbar navbar-dark">
