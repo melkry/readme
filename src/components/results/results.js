@@ -26,7 +26,7 @@ function Results() {
     // Sort the array in descending order of word frequency
     wordScoreArray.sort((a, b) => b.count - a.count);
 
-    console.log(wordScoreArray);
+    let top20 = wordScoreArray.slice(0,19);
 
     return (
         <div>
@@ -34,7 +34,7 @@ function Results() {
             <h2> Display Results Here </h2>
             <div>
                 {
-                    
+                    top20.map((word) => <p>{word.word} -- {word.count}</p>)
                 }
             </div>
         </div>
