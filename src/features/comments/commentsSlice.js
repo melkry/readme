@@ -22,6 +22,7 @@ export const commentsSlice = createSlice({
   initialState: {
     isLoading: false,
     isError: false,
+    user: "stranger",
     comments: [],
     posts: [],
     words: []
@@ -34,6 +35,8 @@ export const commentsSlice = createSlice({
     [getComments.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isError = false;
+
+      state.user = action.payload.responses[0].data.author;
 
       state.comments = action.payload.responses.map((comm) => ({
         id: comm.data.id,
@@ -87,6 +90,8 @@ export const selectComments = (state) => state.comments.comments;
 export const selectPosts = (state) => state.comments.posts;
 
 export const selectWords = (state) => state.comments.words;
+
+export const selectUser = (state) => state.comments.user;
 
 export const selectCommentStatus = (state) => ({
   isCommentsLoading: state.comments.isLoading,
