@@ -1,13 +1,14 @@
 import './portal.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch} from 'react-redux';
+import { getComments } from "../../features/comments/commentsSlice";
 
 function Portal() {
-    const dipatch = useDispatch();
+    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const search = document.getElementById('usernameInput').value;
-        dispatch()
+        dispatch(getComments(search));
     }
 
     return (
@@ -16,10 +17,10 @@ function Portal() {
             <p>Enter a reddit username below to get started!</p>
             <form>
                 <div className="form-group d-flex align-items-center justify-content-center">
-                    <label for="usernameInput">r/</label>
+                    <label htmlFor="usernameInput">u/</label>
                     <input type="text" className="form-control w-25 mx-2" id="usernameInput" aria-describedby="usernameHelp" placeholder="username" />
                 </div>
-                <button type="submit" className="btn btn-outline-warning m-3">Submit</button>
+                <button type="submit" className="btn btn-outline-warning m-3" onClick={handleSubmit}>Submit</button>
             </form>
         </div>
     );

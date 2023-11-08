@@ -1,12 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { unixToDateStr, dictionary } from "../../helpers.js";
 
 export const getComments = createAsyncThunk(
   "comments/getComments",
   async (user, thunkAPI) => {
-    const response = await fetch(
-      `https://www.reddit.com/u/${user}/.json?limit=1000`
+    const posts = await fetch(
+      `https://www.reddit.com/u/${user}/submitted.json?limit=1000`
     ).then((data) => data.json());
-    return response[1].data.children;
+    const responses = await fetch(
+      `https://www.reddit.com/u/${user}/comments.json?limit=100`
+    ).then((data) => data.json());
+    return {
+      responses: responses.data.children,
+      posts: posts.data.children
+    };
   }
 );
 
@@ -15,7 +22,9 @@ export const commentsSlice = createSlice({
   initialState: {
     isLoading: false,
     isError: false,
-    comments: []
+    comments: [],
+    posts: [],
+    words: []
   },
   extraReducers: {
     [getComments.pending]: (state) => {
@@ -25,17 +34,46 @@ export const commentsSlice = createSlice({
     [getComments.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isError = false;
-      /*state.comments = action.payload.map((comm) => ({
+
+      state.comments = action.payload.responses.map((comm) => ({
         id: comm.data.id,
-        body: comm.data.body_html,
+        body: comm.data.body,
         postId: comm.data.parent_id.slice(3),
-        userId: comm.data.author_fullname,
+        userId: comm.data.author_fullname.slice(3),
         author: comm.data.author,
         score: comm.data.score,
-        created: comm.data.created_utc,
+        created: unixToDateStr(comm.data.created_utc),
         replies: comm.data.replies === "" ? [] : comm.data.replies.data.children
-      }));*/
-      console.log(action.payload);
+      }));
+
+      state.posts = action.payload.posts.map((post) => ({
+        id: post.data.id,
+        title: post.data.title,
+        selftext: post.data.selftext,
+        subreddit: post.data.subreddit,
+        score: post.data.score,
+        created: unixToDateStr(post.data.created_utc)
+      }));
+
+      state.words = [];
+
+      let allText = [];
+
+      state.comments.forEach((comm) => {
+        allText.push(comm.body);
+      });
+      state.posts.forEach((post) => {
+        allText.push(post.selftext);
+        allText.push(post.title);
+      });
+      allText.forEach((str) => {
+        let strArr = str.split(' ');
+        strArr.forEach((word) => {
+          if (dictionary.includes(word.toLowerCase())) {
+              state.words.push(word.toLowerCase());
+          }
+      });
+    });
     },
     [getComments.rejected]: (state) => {
       state.isLoading = false;
@@ -45,6 +83,10 @@ export const commentsSlice = createSlice({
 });
 
 export const selectComments = (state) => state.comments.comments;
+
+export const selectPosts = (state) => state.comments.posts;
+
+export const selectWords = (state) => state.comments.words;
 
 export const selectCommentStatus = (state) => ({
   isCommentsLoading: state.comments.isLoading,
