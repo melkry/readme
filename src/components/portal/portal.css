@@ -1,3 +1,16 @@
 #portal {
-   min-height: 85vw;
+   height: 83vh;
+   width: 100%;
 }
+
+#portal #usernameInput {
+   width: 25%;
+}
+
+@media only screen and (max-width: 767px) {
+   /* Styles for screens with a maximum width of 767px (typical for mobile devices) */
+ 
+   #portal #usernameInput {
+      width: 50%;
+   }
+ }

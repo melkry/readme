@@ -7,7 +7,7 @@
   --textPrimary: #ffffff; /* Main text color, white */
   --textSecondary: #aaaaaa; /* Secondary text color, grey */
   --accentYellow: #f1c40f; /* Yellow accent color */
-  --accentPurple: #9b59b6; /* Purple accent color */
+  --accentPurple: #ae66ca; /* Purple accent color */
   --accentPink: #e91e63; /* Pink accent color */
   --defaultFont: 'AR One Sans', sans-serif;
   --headingFont: 'Exo 2', sans-serif;
@@ -16,14 +16,13 @@
 * {
   margin: 0;
   padding: 0;
+  color: var(--textPrimary);
+  font-family: var(--defaultFont);
 }
   
 /* Body styles */
 #root {
   background-color: var(--backgroundPrimary);
-  color: var(--textPrimary);
-  font-family: var(--defaultFont);
-  min-height: 100vw;
 }
 
 /* Header styles */
@@ -66,6 +65,6 @@ nav {
 }
   
 .headingFont, h1, h2, h3, h4 {
-  color: var(--accentPurple);
+  color: var(--accentPurple) !important;
   font-family: var(--headingFont);
 }

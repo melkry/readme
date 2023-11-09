@@ -1,7 +1,7 @@
 function Footer() {
     return (
         <footer className="text-center p-3 backgroundSecondary">
-            Last edited by Melissa in 2023 | Made for educational purposes only
+            <small>Melissa 2023 | Educational purposes only</small>
         </footer>
     );
 }

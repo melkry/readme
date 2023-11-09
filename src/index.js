@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { store } from "./store";
 
 import NavBar from './components/navBar/navBar';
-//import Portal from './components/portal/portal';
+import Portal from './components/portal/portal';
 import Footer from './components/footer/footer';
 import Results from './components/results/results';
 
@@ -22,7 +22,8 @@ root.render(
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Results />} />
+          <Route path="/" element={<Portal />} />
+          <Route path="/results" element={<Results />} />
         </Routes>
         <Footer />
       </BrowserRouter>

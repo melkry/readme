@@ -22,6 +22,7 @@ export const commentsSlice = createSlice({
   initialState: {
     isLoading: false,
     isError: false,
+    isFulfilled: false,
     user: "stranger",
     comments: [],
     posts: [],
@@ -35,6 +36,7 @@ export const commentsSlice = createSlice({
     [getComments.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isError = false;
+      state.isFulfilled = true;
 
       state.user = action.payload.responses[0].data.author;
 
@@ -95,6 +97,7 @@ export const selectUser = (state) => state.comments.user;
 
 export const selectCommentStatus = (state) => ({
   isCommentsLoading: state.comments.isLoading,
+  isCommentsFulfilled: state.comments,
   isCommentsError: state.comments.isError
 });
 
