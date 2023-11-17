@@ -47,7 +47,7 @@ function Results() {
                 <img src="https://www.autopoint.com/wp-content/uploads/2022/07/autopoint-loading-svg.gif" alt="loading" className="my-5"/>
             </div>
             <div id="content" className={status.isCommentsLoading && !status.isCommentsError ? "hidden fade" : "visible container text-center fade"}>
-                <h2 className="my-4 display-1">u/<text className="animatedTitle">{user}</text>'s Statistics</h2>
+                <h2 className="my-4 display-1">u/<span className="animatedTitle">{user}</span>'s Statistics</h2>
                 <h3 className="my-4 display-5">Favourite Words</h3>
                 <div id="bubbleWrapper" className="d-flex justify-content-center align-items-center flex-wrap container my-4">
                     {

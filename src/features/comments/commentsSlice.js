@@ -5,11 +5,14 @@ export const getComments = createAsyncThunk(
   "comments/getComments",
   async (user, thunkAPI) => {
     const posts = await fetch(
-      `https://www.reddit.com/u/${user}/submitted.json?limit=1000`
+      `https://api.reddit.com/u/${user}/submitted.json?limit=1000`
     ).then((data) => data.json());
     const responses = await fetch(
-      `https://www.reddit.com/u/${user}/comments.json?limit=100`
+      `https://api.reddit.com/u/${user}/comments.json?limit=100`
     ).then((data) => data.json());
+
+    console.log(posts);
+    
     return {
       responses: responses.data.children,
       posts: posts.data.children
@@ -17,13 +20,14 @@ export const getComments = createAsyncThunk(
   }
 );
 
+
 export const commentsSlice = createSlice({
   name: "comments",
   initialState: {
     isLoading: false,
     isError: false,
     isFulfilled: false,
-    user: "stranger",
+    user: "n/a",
     comments: [],
     posts: [],
     words: []
@@ -83,6 +87,7 @@ export const commentsSlice = createSlice({
     [getComments.rejected]: (state) => {
       state.isLoading = false;
       state.isError = true;
+      console.log('error');
     }
   }
 });
